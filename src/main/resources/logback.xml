@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
-<!--	<property name="log.dir" value="/data/vaye-shortLink-server/logs/" />-->
-	<property name="log.dir" value="/Users/wangzhiyong/work/logs/" />
+	<property name="log.dir" value="/data/vaye-shortLink-server/logs/" />
+<!--	<property name="log.dir" value="/Users/wangzhiyong/work/logs/" />-->
 	<property name="projectname" value="vaye-shortLink-server" />
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.out</target>

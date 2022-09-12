@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sl.shortLink.dao.ShortLinkDao">
+
+    <resultMap type="com.sl.shortLink.entity.ShortLink" id="ShortLinkMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="shortKey" column="short_key" jdbcType="VARCHAR"/>
+        <result property="originalUrl" column="original_url" jdbcType="VARCHAR"/>
+        <result property="biz" column="biz" jdbcType="INTEGER"/>
+        <result property="gmtCreated" column="gmt_created" jdbcType="TIMESTAMP"/>
+        <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ShortLinkMap">
+        select
+        id, short_key, original_url, biz, gmt_created, gmt_modified
+        from short_link
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ShortLinkMap">
+        select
+        id, short_key, original_url, biz, gmt_created, gmt_modified
+        from short_link
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="shortKey != null and shortKey != ''">
+                and short_key = #{shortKey}
+            </if>
+            <if test="originalUrl != null and originalUrl != ''">
+                and original_url = #{originalUrl}
+            </if>
+            <if test="biz != null">
+                and biz = #{biz}
+            </if>
+            <if test="gmtCreated != null">
+                and gmt_created = #{gmtCreated}
+            </if>
+            <if test="gmtModified != null">
+                and gmt_modified = #{gmtModified}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from short_link
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="shortKey != null and shortKey != ''">
+                and short_key = #{shortKey}
+            </if>
+            <if test="originalUrl != null and originalUrl != ''">
+                and original_url = #{originalUrl}
+            </if>
+            <if test="biz != null">
+                and biz = #{biz}
+            </if>
+            <if test="gmtCreated != null">
+                and gmt_created = #{gmtCreated}
+            </if>
+            <if test="gmtModified != null">
+                and gmt_modified = #{gmtModified}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into short_link(short_key, original_url, biz, gmt_created, gmt_modified)
+        values (#{shortKey}, #{originalUrl}, #{biz}, #{gmtCreated}, #{gmtModified})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into short_link(short_key, original_url, biz, gmt_created, gmt_modified)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.shortKey}, #{entity.originalUrl}, #{entity.biz}, #{entity.gmtCreated}, #{entity.gmtModified})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into short_link(short_key, original_url, biz, gmt_created, gmt_modified)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.shortKey}, #{entity.originalUrl}, #{entity.biz}, #{entity.gmtCreated}, #{entity.gmtModified})
+        </foreach>
+        on duplicate key update
+        short_key = values(short_key),
+        original_url = values(original_url),
+        biz = values(biz),
+        gmt_created = values(gmt_created),
+        gmt_modified = values(gmt_modified)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update short_link
+        <set>
+            <if test="shortKey != null and shortKey != ''">
+                short_key = #{shortKey},
+            </if>
+            <if test="originalUrl != null and originalUrl != ''">
+                original_url = #{originalUrl},
+            </if>
+            <if test="biz != null">
+                biz = #{biz},
+            </if>
+            <if test="gmtCreated != null">
+                gmt_created = #{gmtCreated},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from short_link where id = #{id}
+    </delete>
+
+</mapper>
+
