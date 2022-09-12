@@ -20,7 +20,7 @@ public class SlUtils {
     public static final long MAX_NUMBER = 9007199254740992L;
 
     /**
-     * 获取短链接（本方法适用于）
+     * 获取短链接（本方法适用于id < 9007199254740992L）
      * PS：如果传入的参数id > 9007199254740992L，建议使用另外一个获取方法：{@link BaseUtils#getShortKey(long)}
      * 虽然本方法支持大于9007199254740992L，但是生成的短链接字符串位数长度位17左右
      * @author wangzhiyong
