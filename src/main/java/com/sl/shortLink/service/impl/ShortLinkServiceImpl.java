@@ -36,6 +36,7 @@ public class ShortLinkServiceImpl implements ShortLinkService {
         shortLink.setBiz(biz);
         shortLink.setGmtCreated(new Date());
         shortLinkDao.insert(shortLink);
+        //todo shortKey待完善
         return ResultBuilder.buildSuccessData(shortKey);
     }
 }
