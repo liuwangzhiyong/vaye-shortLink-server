@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+<!--	<property name="log.dir" value="/data/vaye-shortLink-server/logs/" />-->
+	<property name="log.dir" value="/Users/wangzhiyong/work/logs/" />
+	<property name="projectname" value="vaye-shortLink-server" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.out</target>
+		<encoder charset="UTF-8">
+			<pattern>%d [%thread] %-5p [%c] [%F:%L] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="infoAppender"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.dir}/${projectname}.log</file>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.dir}/${projectname}-%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder charset="UTF-8">
+			<pattern>%d [%thread] %-5p [%c] [%F:%L] [trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-},parent=%X{X-Parent-Id:-},name=%X{X-Span-Name:-},app=%X{appname:-},begintime=%X{begintime:-},endtime=%X{fin-X1-time:-}] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="errorAppender"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.dir}/${projectname}_error.log</file>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.dir}/${projectname}_error-%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder charset="UTF-8">
+			<pattern>%d [%thread] %-5p [%c] [%F:%L] [trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-},parent=%X{X-Parent-Id:-},name=%X{X-Span-Name:-},app=%X{appname:-},begintime=%X{begintime:-},endtime=%X{fin-X1-time:-}] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.apache">
+		<level value="INFO" />
+		<appender-ref ref="errorAppender" />
+		<appender-ref ref="infoAppender" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="INFO" />
+		<appender-ref ref="errorAppender" />
+		<appender-ref ref="infoAppender" />
+	</logger>
+	<logger name="com.sl.shortLink">
+		<level value="INFO" />
+		<appender-ref ref="errorAppender" />
+		<appender-ref ref="infoAppender" />
+	</logger>
+
+	<logger name="com.netflix">
+		<level value="INFO" />
+		<appender-ref ref="errorAppender" />
+		<appender-ref ref="infoAppender" />
+	</logger>
+	<root>
+		<level value="WARN" />
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

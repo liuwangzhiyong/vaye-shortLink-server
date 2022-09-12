@@ -1,0 +1,100 @@
+server:
+  port: 7010
+  servlet:
+    context-path: /shortLink
+spring:
+  profiles:
+    active: test
+logging:
+  level:
+    com.coolgua: DEBUG
+  config: classpath:logback.xml
+mybatis-plus:
+  mapper-locations: classpath*:mappers/*Mapper.xml
+  type-aliases-package: com.sl.shortLink.model,com.sl.shortLink.dao
+  global-config:
+    id-type: 1
+    field-strategy: 1
+    db-column-underline: false
+    capital-mode: false
+  type-enums-package: com.sl.shortLink.enums
+  #  配置控制台日志打印(本地调试的时候可以放开，线上不要放开)
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+---
+#开发环境配置
+spring:
+  config:
+    activate:
+      on-profile: test
+  redis:
+    host: 39.107.204.228
+    port: 63359
+    database: 0
+    timeout: 10S
+    password: 69e87a96-5251-67d7-2455-7633118a5661
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 10
+        max-wait: 30S
+        min-idle: 1
+  datasource:
+    url: jdbc:mysql://39.107.204.228:3466/dongbei_test?allowMultiQueries=true&useUnicode=true&amp
+    username: root
+    password: s2GNHRE3@1G*tTF3
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 5
+    min-idle: 5
+    max-active: 300
+    max-wait: 10000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT now() FROM DUAL
+    test-while-idle: true
+    test-on-borrow: true
+    test-on-return: false
+    web-stat-filter:
+      enabled: false
+    stat-view-servlet:
+      enabled: false
+---
+#生产环境配置
+spring:
+  config:
+    activate:
+      on-profile: prod
+#  redis:
+#    host: 39.107.204.228
+#    port: 63359
+#    database: 0
+#    timeout: 10S
+#    password: 69e87a96-5251-67d7-2455-7633118a5661
+#    jedis:
+#      pool:
+#        max-active: 20
+#        max-idle: 10
+#        max-wait: 30S
+#        min-idle: 1
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3346/dongbei?allowMultiQueries=true&useUnicode=true&amp
+    username: root
+    password: sw_123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 5
+    min-idle: 5
+    max-active: 300
+    max-wait: 10000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT now() FROM DUAL
+    test-while-idle: true
+    test-on-borrow: true
+    test-on-return: false
+    web-stat-filter:
+      enabled: false
+    stat-view-servlet:
+      enabled: false
