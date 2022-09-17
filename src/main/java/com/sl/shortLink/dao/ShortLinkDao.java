@@ -81,5 +81,6 @@ public interface ShortLinkDao extends BaseMapper<ShortLink> {
      */
     int deleteById(Long id);
 
+    String selectByShortKey(@Param("key") String key);
 }
 

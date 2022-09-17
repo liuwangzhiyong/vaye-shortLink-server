@@ -6,7 +6,6 @@ import org.apache.commons.lang3.RandomUtils;
  * Base工具类
  *
  * @author wangzhiyong
- * @module 炫云-云模型
  * @date 2022年09月12日 下午5:42
  */
 public class BaseUtils {
@@ -88,15 +87,5 @@ public class BaseUtils {
         long l = insertRandomBitPer5Bits(id);
         String shortKey = toBase62(l);
         return shortKey;
-    }
-
-    public static void main(String[] args) {
-        for (int i = 0; i < 50; i++) {
-            long id = SnowflakeIdUtil.nextId();
-            long l = insertRandomBitPer5Bits(id);
-            String s = toBase62(id);
-            System.out.println("s = " + s);
-        }
-
     }
 }

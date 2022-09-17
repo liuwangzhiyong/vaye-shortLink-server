@@ -1,6 +1,7 @@
 package com.sl.shortLink.service;
 
 import com.sl.shortLink.common.ResultModel;
+import com.sl.shortLink.dto.params.BatchGenerateShortLinkParams;
 import com.sl.shortLink.dto.params.GenerateShortLinkParams;
 import com.sl.shortLink.entity.ShortLink;
 import org.springframework.data.domain.Page;
@@ -15,4 +16,6 @@ import org.springframework.data.domain.PageRequest;
 public interface ShortLinkService {
 
     ResultModel generate(String biz, GenerateShortLinkParams params);
+
+    String lookup(String key);
 }

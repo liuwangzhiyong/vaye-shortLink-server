@@ -3,8 +3,6 @@ package com.sl.shortLink.utils;
 import com.sl.shortLink.constants.SlConstants;
 import org.hashids.Hashids;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -15,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class SlUtils {
 
-    private static final Hashids hashids = new Hashids(SlConstants.HASHIDS_SALT,6);
+    private static final Hashids hashids = new Hashids(SlConstants.HASHIDS_SALT,4);
 
     public static final long MAX_NUMBER = 9007199254740992L;
 
@@ -37,14 +35,6 @@ public class SlUtils {
             return hashids.encode(ids);
         } else {
             return hashids.encode(id);
-        }
-    }
-
-    public static void main(String[] args) {
-        for (int i = 0; i < 50; i++) {
-            long id = SnowflakeIdUtil.nextId();
-            String shortKey = getShortKey(id);
-            System.out.println("shortKey = " + shortKey);
         }
     }
 }

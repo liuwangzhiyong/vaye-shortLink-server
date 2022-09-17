@@ -72,11 +72,16 @@
             </if>
         </where>
     </select>
+    <select id="selectByShortKey" resultType="java.lang.String">
+        select original_url
+        from short_link
+        where short_key = #{key}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into short_link(short_key, original_url, biz, gmt_created, gmt_modified)
-        values (#{shortKey}, #{originalUrl}, #{biz}, #{gmtCreated}, #{gmtModified})
+        insert into short_link(id,short_key, original_url, biz, gmt_created, gmt_modified)
+        values (#{id},#{shortKey}, #{originalUrl}, #{biz}, #{gmtCreated}, #{gmtModified})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">

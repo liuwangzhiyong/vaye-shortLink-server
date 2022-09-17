@@ -1,6 +1,9 @@
 package com.sl.shortLink.utils;
 
+import lombok.SneakyThrows;
+
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -51,6 +54,12 @@ public class UuidUtils {
         String randomUUID = UUID.randomUUID().toString();
         String uuid = randomUUID.replaceAll("-", "");
         return uuid;
+    }
+
+    @SneakyThrows
+    public static void main(String[] args) {
+        HashMap map = new HashMap();
+        map.put("1",1);
     }
 
 }

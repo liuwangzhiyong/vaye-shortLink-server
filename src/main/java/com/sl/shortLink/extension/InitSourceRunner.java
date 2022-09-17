@@ -1,16 +1,13 @@
 package com.sl.shortLink.extension;
 
-import com.sl.shortLink.dto.params.GenerateShortLinkParams;
-import com.sl.shortLink.service.ShortLinkService;
+import com.sl.shortLink.config.LocalQueueStore;
 import com.sl.shortLink.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @author wangzhiyong
@@ -18,15 +15,11 @@ import java.util.concurrent.Executors;
  */
 @Component
 @Slf4j
-public class InitTestRunner implements ApplicationRunner {
-
-    @Autowired
-    private RedisUtil redisUtil;
+@Order(Integer.MIN_VALUE + 1)
+public class InitSourceRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        boolean flag = false;
-        if (flag) {
-        }
+        LocalQueueStore.init();
     }
 }

@@ -8,7 +8,7 @@ logging:
     com.coolgua: DEBUG
   config: classpath:logback.xml
 mybatis-plus:
-  mapper-locations: classpath*:mappers/*Mapper.xml
+  mapper-locations: classpath*:mapper/*Dao.xml
   type-aliases-package: com.sl.shortLink.entity,com.sl.shortLink.dao
   global-config:
     id-type: 1
@@ -59,8 +59,7 @@ spring:
     stat-view-servlet:
       enabled: false
 shortLink:
-  domain: http://127.0.0.1:7010
-  jumpUrl:
+  domain: http://127.0.0.1:7010/
 ---
 #生产环境配置
 spring:
@@ -99,3 +98,5 @@ spring:
       enabled: false
     stat-view-servlet:
       enabled: false
+shortLink:
+  domain: http://127.0.0.1:7010/

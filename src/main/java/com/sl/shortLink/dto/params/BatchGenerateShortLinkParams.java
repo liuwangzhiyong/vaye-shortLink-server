@@ -12,7 +12,8 @@ import java.util.List;
  * @date 2022年09月12日 下午4:39
  */
 @Data
-public class GenerateShortLinkParams implements Serializable {
+public class BatchGenerateShortLinkParams implements Serializable {
+    private static final long serialVersionUID = -1631990664484733161L;
     //要转换的原链接url
-    private String url;
+    private List<String> urls;
 }

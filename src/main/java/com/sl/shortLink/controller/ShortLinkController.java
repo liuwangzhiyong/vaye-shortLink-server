@@ -1,18 +1,15 @@
 package com.sl.shortLink.controller;
 
-import com.sl.shortLink.common.ResultBuilder;
 import com.sl.shortLink.common.ResultModel;
 import com.sl.shortLink.dto.params.GenerateShortLinkParams;
-import com.sl.shortLink.entity.ShortLink;
 import com.sl.shortLink.service.ShortLinkService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+
+import static com.sl.shortLink.common.ResultBuilder.buildPageParamError;
 
 /**
  * (ShortLink)表控制层
@@ -39,8 +36,8 @@ public class ShortLinkController {
      */
     @RequestMapping(value = "/generate", method = RequestMethod.POST)
     public ResultModel generate(@RequestHeader("biz") String biz, @RequestBody GenerateShortLinkParams params) {
-        if (ObjectUtils.isEmpty(biz) || ObjectUtils.isEmpty(params) || CollectionUtils.isEmpty(params.getUrls())) {
-            return ResultBuilder.buildPageParamError("the params of request is missing");
+        if (ObjectUtils.isEmpty(biz) || ObjectUtils.isEmpty(params) || StringUtils.isEmpty(params.getUrl())) {
+            return buildPageParamError("the params of request is missing");
         }
         return shortLinkService.generate(biz,params);
     }
