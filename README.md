@@ -4,7 +4,7 @@
 
 ### 什么是短链接？
 
-短链接就是将很长的一个链接转换为非常短的链接，我们举个例子，比如我们现在有一个很长的网址：https://mvnrepository.com/artifact/org.sonarsource.api.plugin/sonar-plugin-api/9.11.0.290经过转换后生成一个短链接：https://mvnrepository.com/an1s。我们访问短链接和访问长链接效果是一样的，访问短链接的时候能够跳转到长链接上面。
+短链接就是将很长的一个链接转换为非常短的链接，我们举个例子，比如我们现在有一个很长的网址：<https://mvnrepository.com/artifact/org.sonarsource.api.plugin/sonar-plugin-api/9.11.0.290>经过转换后生成一个短链接：https://mvnrepository.com/an1s。我们访问短链接和访问长链接效果是一样的，访问短链接的时候能够跳转到长链接上面。
 
 ### 短链接使用场景
 
