@@ -44,7 +44,7 @@ public class ShortLinkAccessController {
         } else {
             originalUrl = shortLinkService.lookup(key);
             if (StringUtils.isBlank(originalUrl)) {
-                // 如果没有找到长链接，跳转到我们的 m 站，这里其实定制一个 404 页面比较好
+                // 如果没有找到长链接，跳转到我们的网站首页站或者定制一个 404 页面
                 response.sendRedirect("https://www.baidu.com");
             }
             redisUtil.set(String.format(CacheConstant.SHORT_KEY_PREFIX,key),originalUrl,1, TimeUnit.HOURS);
